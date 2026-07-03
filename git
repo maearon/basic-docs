@@ -1,0 +1,230 @@
+@n-manh
+1) Tạo 1 git repo, với 1 file README.md, và branch master
+2) Sửa file README.md và tạo 1 commit mới
+3) Thêm file app.rb, rails.rb và tạo 1 commit mới
+4) Xoá file rails.rb và tạo 1 commit mới
+5) Đẩy branch master lên github
+5) Tạo branch mới develop từ master
+6) Thêm file manh.html và tạo commit mới với develop
+7) Sửa file mạnh.html và tạo commit mới với develop
+8) Xoá commit sửa file manh.html
+9) Đổi tên branch develop thành developer
+10) Tạo pull giữa developer và master.
+
+1) Create a git repo, with a README.md file, and a branch master
+cd 
+mkdir git_test
+cd git_test
+git init
+touch README.md
+git add .
+git commit -am "1) Create a git repo, with a README.md file, and a branch master"
+2) Edit the README.md file and create a new commit
+nano README.md
+git add .
+git commit -am "2) Edit the README.md file and create a new commit"
+3) Add the app.rb, rails.rb file and create a new commit
+touch app.rb
+touch rails.rb
+git add .
+git commit -am "3) Add the app.rb, rails.rb file and create a new commit"
+4) Delete the rails.rb file and create a new commit
+git rm rails.rb
+git add .
+git commit -am "4) Delete the rails.rb file and create a new commit"
+5) Push the master branch to github
+git remote add origin https://github.com/manh11117/git_test.git
+git push -u origin master
+6) Create new branch develop from master
+git checkout -b develop
+git add .
+git commit -am "6) Create new branch developed from master"
+7) Add manh.html file and create new commit with develop
+touch manh.html
+git add .
+git commit -am "7) Add manh.html file and create new commit with develop"
+8) Edit the manh.html and create a new commit with develop
+nano manh.html
+git add .
+git commit -am "8) Edit the strong file.html and create a new commit with develop" 
+9) Delete commit edit file manh.html
+git rebase -i baa9ea3a9e95f5bfb0c1d1ceab4a18d30bf6db9c
+git add .
+git commit -am "9) Delete commit edit file manh.html"
+(The commit is identified by a hash baa9ea3a9e95f5bfb0c1d1ceab4a18d30bf6db9c, check git log phải có 2 commit trở lên mới dùng đc git rebase -i drop)
+Sau đó sửa pick thành drop trước commit muốn xóa
+10)
+a) Change the branch develop name to developer
+b) Create pull between developer and master
+manipulate on github https://help.github.com/en/articles/creating-a-pull-request
+git branch -m develop developer
+git add .
+git commit -am "10a) Change the branch develop name to developer"
+git push
+fatal: The current branch developer has no upstream branch.
+To push the current branch and set the remote as upstream, use
+git push --set-upstream origin developer
+
+11) Tạo nhánh manh_dev từ nhánh master
+12) Thêm tệp manh_dev.rb trong nhánh manh_dev và tạo 1 commit
+13) Thêm tệp manh_dev.rb trong nhánh developer và tạo 1 commit
+14) Pull merge nhánh developer vào nhánh master
+15) Rebase nhánh manh_dev
+16) Tạo tệp commit_temp.tmp tại nhánh manh_dev và tạo 1 cam kết
+17) Di chuyển cam kết vừa tạo đến nhánh master
+18) Tạo thêm tệp merge_commit.txt vào nhánh developer và tạo 1 cam kết
+19) Hợp nhất 2 cam kết cuối cùng của nhánh developer tạo thành 1 cam kết
+20) Tạo pull request giữa nhánh developer và nhánh master.
+
+11) Create branch manh_dev from branch master
+git checkout master
+git checkout -b manh_dev
+git add .
+git commit -am "11) Create branch manh_dev from branch master"
+12) Add file manh_dev.rb in branch manh_dev, and create 1 commit
+touch manh_dev.rb
+git add .
+git commit -am "12) Add file manh_dev.rb in branch manh_dev, and create 1 commit"
+13) Add file manh_dev.rb in branch developer, and create 1 commit
+git checkout developer
+touch manh_dev.rb
+git add .
+git commit -am "13) Add file manh_dev.rb in branch developer, and create 1 commit"
+14) Create "Merge pull request" branch developer into branch master
+manipulate on github https://help.github.com/en/articles/merging-a-pull-request
+OR
+git checkout master
+git merge developer
+15) Rebase branch manh_dev
+git checkout manh_dev
+git rebase manh_dev
+output: Current branch manh_dev is up to date.
+Thêm kết nối giữa master đến manh_dev (HEAD -> manh_dev)
+16) Create file commit_temp.tmp into branch manh_dev, and create 1 commit
+git checkout manh_dev
+touch commit_temp.tmp
+git add .
+git commit -am "16) Create file commit_temp.tmp into branch manh_dev, and create 1 commit"
+17) Move commit just created, to branch developer
+git checkout developer
+git cherry-pick 612ecb3
+git add .
+git commit -am "17) Move commit just created, to branch developer"
+https://stackoverflow.com/questions/1628563/move-the-most-recent-commits-to-a-new-branch-with-git
+18) Create more file merge_commit.txt into branch developer, and create 1 commit
+git checkout developer
+touch merge_commit.txt
+git add .
+git commit -am "18) Create more file merge_commit.txt into branch developer, and create 1 commit"
+19) Merge 2 last commits of branch developer  forming 1 commit
+git log --oneline
+git rebase -i baa9ea3
+git add .
+git commit -am "19) Merge 2 last commits of branch developer  forming 1 commit"
+(baa9ea3 là 7 kí tự đầu của hash để xác định commit mà trước hai commit cuối cùng muốn gộp)
+sau đó thêm squash trước commit cuối cùng
+pick   b76d157
+squash a931ac7
+Crtl + X --> Shift + Y --> để gộp commit cuối cùng với commit trước
+Sau đó sẽ đến màn hình đổi tên sẽ có tên 2 commit vừa gộp, xóa 1 tên và đổi tên còn lại thành tên muốn lấy làm tên commit tạo thành)
+Crtl + X --> Shift + Y --> git log để thấy 2 commit cuối đã được gộp thành một
+https://stackoverflow.com/questions/2563632/how-can-i-merge-two-commits-into-one-if-i-already-started-rebase
+20) Create pull request between developer branch and master branch.
+git add .
+git commit -am "20) Create pull request between developer branch and master branch"
+manipulate on github https://help.github.com/en/articles/creating-a-pull-request
+markdown code slack --> Định dạng khối văn bản  - -> Ctrl + Shift + C
+https://get.slack.help/hc/en-us/articles/202288908-Format-your-messages
+
+REMOVED FILE MERGE CONFLICTS
+1) git commit -am "18) Create more file merge_commit.txt into branch developer, and create 1 commit"
+---> 18) Tạo thêm tệp merge_commit.txt vào nhánh developer và tạo 1 cam kết
+2) git log
+---> Xem có commit số 18 chưa
+3) git log --oneline
+---> Xem các commit một dòng
+4) git rebase -i f80e144
+---> 19) Hợp nhất 2 cam kết cuối cùng của nhánh developer tạo thành 1 cam kết
+5) git log --oneline
+---> Xem lại nhánh đã đc gộp chưa
+6) git branch
+7) git add .
+8) git push
+9) git push --set-upstream origin manh_dev
+---------------------------------------------------------------- kéo lại nhánh master
+10) git checkout master
+11) git log --oneline
+12) git pull
+git log --online
+---------------------------------------------------------------- check nhanh develop
+git checkout developer
+git log --oneline
+---------------------------------------------------------------- check nhanh manh_dev
+git checkout manh_dev
+git log --oneline
+---------------------------------------------------------------- keo lai nhanh developer da co file dc them tu mot cong tac vien (co the la chinh minh) --> file manual
+git branch
+git checkout developer
+git pull
+---------------------------------------------------------------- rebase nhanh manh_dev voi nhanh developer (commit cuoi cung cua nhanh developer se rebase voi commit dau tien cua nhanh manh_dev)
+git checkout manh_dev
+git rebase developer
+---------------------------------------------------------------- check file manual
+git status
+echo manual
+---------------------------------------------------------------- sua file fix manual
+gedit manual
+---------------------------------------------------------------- thu push len --> file fix manual da dc sua
+git status
+git add .
+git commit -m 'fix manual'
+git push -f
+---------------------------------------------------------------- keo lai nhanh developer khi dng o nhanh manh_dev
+git checkout developer
+git pull
+---------------------------------------------------------------- mot cong tac vien khac da sua file manual,can keo lai
+---------------------------------------------------------------- rebase nhanh manh_dev voi nhanh developer --> again
+git checkout manh_dev
+git rebase developer
+----------------------------------- OUTPUT loi rebase
+First, rewinding head to replay your work on top of it...
+Applying: fix manual
+Using index info to reconstruct a base tree...
+M manual
+Falling back to patching base and 3-way merge...
+Auto-merging manual
+CONFLICT (content): Merge conflict in manual
+error: Failed to merge in the changes.
+Patch failed at 0001 fix manual
+Use 'git am --show-current-patch' to see the failed patch
+
+Resolve all conflicts manually, mark them as resolved with
+"git add/rm <conflicted_files>", then run "git rebase --continue".
+You can instead skip this commit: run "git rebase --skip".
+To abort and get back to the state before "git rebase", run "git rebase --abort".
+
+-----------------------------------
+git status
+---------------------------------------------------------------- fix conflict file manual
+gedit manual
+git add .
+---------------------------------------------------------------- fix xong file manual va add vao hang cho
+git rebase - continue
+----------------------------------- OUTPUT
+Applying: fix manual
+-----------------------------------
+git log --> da co
+git push -f
+
+--------------------------
+
+<<<<<<< HEAD
+file
+=======
+file.txt
+>>>>>>> Create file.txt
+
+https://drive.google.com/file/d/1mOHa8OUmOyqylOblDPF5B6f9WL19KY5L/view
+https://drive.google.com/file/d/1q79eFJQxWdd2HUKMn9iereuQObgMoDJV/view
+https://drive.google.com/file/d/1H3eJOXWtWgaGB8fGnbXdMiMq7uxlX3Id/view
+

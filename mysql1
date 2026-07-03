@@ -1,0 +1,184 @@
+1.  Create Database mysql_learn
+mysql -u root -p
+CREATE DATABASE mysql_learn;
+SHOW DATABASES;
+USE mysql_learn;
+SHOW tables;
+2. Create Table users: id(integer), name(uniq - string 255), birthdate(datetime), address(text), active(boolean, default: true), created_at(datetime), updated_at(datetime)
+CREATE TABLE users (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+name VARCHAR(255) UNIQUE,
+birthdate DATETIME, 
+address TEXT,
+active BOOLEAN DEFAULT 1,
+created_at DATETIME,
+updated_at DATETIME
+); 
+3. Create Table blogs: id(integer), user_id(foreign key table User), title(string), content(text), created_at(datetime), updated_at(datetime)
+CREATE TABLE blogs (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+user_id INT, 
+title VARCHAR(255),
+content TEXT,
+created_at DATETIME,
+updated_at DATETIME
+);
+4. Create Table comments: id(integer), user_id(foreign_key Table User), blog_id(foreign_key table Blog), content(text), created_at(datetime), updated_at(datetime)
+CREATE TABLE comments (
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+user_id INT,  
+blog_id INT,
+content TEXT, 
+created_at DATETIME,
+updated_at DATETIME
+);
+SHOW tables;
+5. Write 1 sql command Create 10 users, including 1 user named Dung and age 25
+INSERT INTO users (
+    id,
+    name,
+    birthdate, 
+    address,
+    active,
+    created_at,
+    updated_at
+)
+VALUES
+   ('1','Dung','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('2','Mai','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('3','Luan','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('4','Dungg','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('5','Viet','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('6','Phuc','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('7','Dunggg','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('8','Nhat','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('9','Ngoc','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('10','Manh','1994-12-31 23:59:59','hanoi',1,'9999-12-31 23:59:59','9999-12-31 23:59:59');
+Check:
+SELECT COUNT(id) FROM users;
+SELECT COUNT(id) FROM users WHERE name='Dung';
+SELECT DATEDIFF(CURRENT_DATE, DATE(birthdate))/365 AS age FROM users WHERE name='Dung';
+6. Viết 1 lệnh sql Tạo 20 blogs cho 5 user có id: [1,2,3,4,5] (số lượng blog cho mỗi user là tuỳ ý.)
+INSERT INTO blogs (
+    id,
+    user_id,
+    title, 
+    content,
+    created_at,
+    updated_at
+)
+VALUES
+   ('1','1','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('2','1','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('3','1','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('4','1','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('5','2','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('6','2','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('7','2','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('8','2','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('9','3','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('10','3','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('11','3','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('12','3','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('13','4','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('14','4','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('15','4','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('16','4','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('17','5','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('18','5','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('19','5','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('20','5','title','content','9999-12-31 23:59:59','9999-12-31 23:59:59');
+SELECT COUNT(id),  user_id FROM blogs WHERE user_id>0 and user_id<21 GROUP BY user_id;
+
+4. comments: id(integer), user_id(foreign_key Table User), blog_id(foreign_key table Blog), content(text), created_at(datetime), updated_at(datetime)
+
+INSERT INTO comments (
+    id,
+    user_id,
+    blog_id,
+    content,
+    created_at,
+    updated_at
+)
+VALUES
+   ('1','6','1','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('2','6','1','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('3','6','1','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('4','6','1','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('5','7','2','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('6','7','2','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('7','7','2','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('8','7','2','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('9','8','3','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('10','8','3','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('11','8','3','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('12','8','3','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('13','9','4','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('14','9','4','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('15','9','4','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('16','9','4','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('17','10','5','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('18','10','5','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('19','10','5','content','9999-12-31 23:59:59','9999-12-31 23:59:59'),
+   ('20','10','5','content','9999-12-31 23:59:59','9999-12-31 23:59:59');
+
+ALTER TABLE blogs ADD CONSTRAINT FK_blogs_to_users FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE comments ADD CONSTRAINT fk_comments_users FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE comments ADD CONSTRAINT fk_comments_blogs FOREIGN KEY (blog_id) REFERENCES users(id);
+
+SELECT
+  TABLE_NAME,
+  COLUMN_NAME,
+  CONSTRAINT_NAME,
+  REFERENCED_TABLE_NAME,
+  REFERENCED_COLUMN_NAME
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE
+  REFERENCED_TABLE_NAME = 'users';
+
+8. Viết query tìm tất cả User tên là Dung và có tuổi từ 20-30
+```SELECT name,DATEDIFF(CURRENT_DATE, DATE(birthdate))/365 AS age FROM users WHERE name='Dung' HAVING age>=20 and age <=31;```
+9. Viết query tìm 1 User có số lượng comments nhiều nhất.
+```SELECT users.id, COUNT(comments.id) AS total
+FROM users
+
+INNER JOIN comments
+ON users.id=comments.user_id
+GROUP BY comments.user_id 
+ORDER BY total DESC
+LIMIT 1;```
+```SELECT * FROM users
+where id IN (
+    SELECT user_id from (
+      SELECT user_id, COUNT(comments.id) AS total from comments 
+      GROUP BY comments.user_id 
+      ORDER BY total DESC
+      LIMIT 1
+    ) as xx
+)```
+10.Sắp xếp danh sách User theo số lượng comments từ cao đến thấp.
+```SELECT users.*, COUNT(comments.id) AS total
+FROM users
+
+INNER JOIN comments
+ON users.id=comments.user_id
+GROUP BY comments.user_id 
+ORDER BY total DESC;```
+
+11. Convert the data type of title (Blog) to text.
+```SHOW COLUMNS FROM blogs;
+ALTER TABLE blogs MODIFY title TEXT;```
+https://dev.mysql.com/doc/refman/8.0/en/show-columns.html
+12. Update all User names to add Updated word. For example: User name Dung will become Dung Updated.
+```SELECT CONCAT(name, ' Updated') as new_name FROM users;
+UPDATE users SET name=CONCAT(name, ' Updated');```
+13  Backup database (export & import).
+```$mysqldump -uroot -p mysql_test > mysql_test.sql;
+$mysql -uroot -p test < mysql_test.sql```
+https://www.techrepublic.com/article/how-to-export-and-import-mysql-databases/
+
+
+
+
+
+

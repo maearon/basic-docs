@@ -1,0 +1,12 @@
+http://dev.mysql.com/doc/index-other.html
+sudo mysql -u root -p
+SOURCE sakila-schema.sql;
+SOURCE sakila-data.sql;
+USE sakila;
+SHOW COLUMNS FROM actor;
+1. Trả lại tên đầy đủ (tên và họ) của các diễn viên với “SON” trong họ của họ, được sắp xếp theo tên của họ.
+SELECT CONCAT(first_name, " ",last_name) AS fullname FROM actor WHERE LOCATE("SON", last_name) ORDER BY first_name;
+2. Tìm tất cả các địa chỉ trong đó address2 không trống (nghĩa là có chứa một số văn bản) và trả về các địa chỉ thứ hai này được sắp xếp.
+SELECT address, address2 FROM address WHERE address2 IS NOT NULL ORDER BY address2;
+3. Trả lại tên và họ của các diễn viên đã đóng trong một bộ phim liên quan đến “Crocodile” và “Shark”, cùng với năm phát hành của bộ phim, được sắp xếp theo tên của các diễn viên.
+
